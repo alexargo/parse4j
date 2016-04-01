@@ -2,8 +2,6 @@ package org.parse4j;
 
 public class ParseConstants {
 
-	public static final String API_VERSION = "1";
-
 	public static final String HEADER_CONTENT_TYPE = "Content-Type";
 	public static final String HEADER_APPLICATION_ID = "X-Parse-Application-Id";
 	public static final String HEADER_REST_API_KEY = "X-Parse-REST-API-Key";

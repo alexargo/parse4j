@@ -20,8 +20,7 @@ public class ParseBatchCommand extends ParseCommand{
 
 	public String getUrl(){
 		String base = Parse.getServerURL();
-		String version = ParseConstants.API_VERSION;
-		return base + "/" +version + "/" + "batch";
+		return base + "/" + "batch";
 	}
 	@Override
 	public HttpRequestBase getRequest() throws IOException {
