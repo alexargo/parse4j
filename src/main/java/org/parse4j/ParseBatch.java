@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class ParseBatch {
-	private static final String path = "/"+ "classes" + "/";
+	private static final String path = "/1/classes/";
 	private JSONArray data = new JSONArray();
 
 	private static Logger LOGGER = LoggerFactory.getLogger(ParseBatch.class);
