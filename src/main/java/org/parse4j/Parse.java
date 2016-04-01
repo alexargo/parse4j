@@ -17,6 +17,7 @@ public class Parse {
 	private static String mMasterKey;
 	private static final DateFormat dateFormat;
 	private static boolean isRootMode;
+	private static String mAPIEndPoint;
 
 	static {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -26,9 +27,18 @@ public class Parse {
 		ParseFieldOperations.registerDefaultDecoders();
 	}
 
+	static public void initialize(String applicationId, String restAPIKey, String serverURL) {
+		mApplicationId = applicationId;
+		mRestAPIKey = restAPIKey;
+		mAPIEndPoint = serverURL;
+		isRootMode = false;
+	}
+
+	@Deprecated
 	static public void initialize(String applicationId, String restAPIKey) {
 		mApplicationId = applicationId;
 		mRestAPIKey = restAPIKey;
+		mAPIEndPoint = "https://api.parse.com";
 		isRootMode = false;
 	}
 
@@ -39,9 +49,12 @@ public class Parse {
 	 * @param applicationId your app id
 	 * @param masterKey your master key
 	 */
+
+	@Deprecated
 	static public void initializeAsRoot (String applicationId, String masterKey) {
 		mApplicationId = applicationId;
 		mMasterKey = masterKey;
+		mAPIEndPoint = "https://api.parse.com";
 		isRootMode = true;
 	}
 
@@ -53,12 +66,14 @@ public class Parse {
 		return mRestAPIKey;
 	}
 
+	static public String getServerURL() { return mAPIEndPoint; }
+
 	public static boolean isIsRootMode() {
 		return isRootMode;
 	}
 
 	static public String getParseAPIUrl(String context) {
-		return ParseConstants.API_ENDPOINT + "/" + ParseConstants.API_VERSION
+		return mAPIEndPoint + "/" + ParseConstants.API_VERSION
 				+ "/" + context;
 	}
 
