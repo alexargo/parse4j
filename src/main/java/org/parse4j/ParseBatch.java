@@ -21,7 +21,7 @@ public class ParseBatch {
 
 	private static String getPath() {
 		//FIXME: This is a hack, but not sure what it's supposed to be
-		return Parse.isCustomServer() ? "/parse/classes/" : "/1/classes";
+		return Parse.isCustomServer() ? "/parse/classes/" : "/1/classes/";
 	}
 
 	public void deleteObject(ParseObject obj) {
