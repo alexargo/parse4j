@@ -19,8 +19,7 @@ public class ParseBatchCommand extends ParseCommand {
 	private static Logger LOGGER = LoggerFactory.getLogger(ParseBatchCommand.class);
 
 	public String getUrl() {
-		String version = ParseConstants.API_VERSION;
-		return Parse.getParseAPIUrl("" + version + "/" + "batch");
+		return Parse.getParseAPIUrl("batch");
 	}
 
 	@Override
