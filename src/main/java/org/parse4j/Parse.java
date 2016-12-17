@@ -71,6 +71,8 @@ public class Parse {
 		return isRootMode;
 	}
 
+	public static boolean isCustomServer() { return bCustomServer; }
+
 	static public String getParseAPIUrl(String context) {
 
 		if(bCustomServer){

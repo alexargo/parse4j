@@ -14,16 +14,20 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class ParseBatch {
-	private static final String path = "/1/classes/";
+
 	private JSONArray data = new JSONArray();
 
 	private static Logger LOGGER = LoggerFactory.getLogger(ParseBatch.class);
+
+	private static String getPath() {
+		return Parse.isCustomServer() ? "/classes/" : "/1/classes";
+	}
 
 	public void deleteObject(ParseObject obj) {
 		if (obj.getObjectId() == null)
 			throw new IllegalArgumentException("for delete operation your object should provide objectId");
 		JSONObject inner = new JSONObject();
-		inner.put("path", path + obj.getClassName() + "/" + obj.getObjectId());
+		inner.put("path", getPath() + obj.getClassName() + "/" + obj.getObjectId());
 		inner.put("method", "DELETE");
 		inner.put("body", obj.getParseData());
 		data.put(inner);
@@ -31,7 +35,7 @@ public class ParseBatch {
 
 	public void createObject(ParseObject obj) {
 		JSONObject inner = new JSONObject();
-		inner.put("path", path + obj.getClassName());
+		inner.put("path", getPath() + obj.getClassName());
 		inner.put("method", "POST");
 		inner.put("body", obj.getParseData());
 		data.put(inner);
@@ -41,7 +45,7 @@ public class ParseBatch {
 		if (obj.getObjectId() == null)
 			throw new IllegalArgumentException("for update operation your object should provide objectId");
 		JSONObject inner = new JSONObject();
-		inner.put("path", path + obj.getClassName() + "/" + obj.getObjectId());
+		inner.put("path", getPath() + obj.getClassName() + "/" + obj.getObjectId());
 		inner.put("method", "PUT");
 		inner.put("body", obj.getParseData());
 		data.put(inner);
