@@ -14,22 +14,23 @@ import org.slf4j.LoggerFactory;
  * @author Nikolay Rusev
  *
  */
-public class ParseBatchCommand extends ParseCommand{
+public class ParseBatchCommand extends ParseCommand {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(ParseBatchCommand.class);
 
-	public String getUrl(){
-		String base = Parse.getServerURL();
-		return base + "/" + "batch";
+	public String getUrl() {
+		String version = ParseConstants.API_VERSION;
+		return Parse.getParseAPIUrl("" + version + "/" + "batch");
 	}
+
 	@Override
 	public HttpRequestBase getRequest() throws IOException {
-		
+
 		HttpPost httppost = new HttpPost(getUrl());
 		setupHeaders(httppost, addJson);
 
 		if (data.has("requests")) {
-			if(LOGGER.isDebugEnabled()) {
+			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("Sending data: {}", data.getJSONArray("requests"));
 			}
 			httppost.setEntity(new StringEntity(data.toString(), "UTF8"));

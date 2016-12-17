@@ -28,18 +28,10 @@ public class Parse {
 		ParseFieldOperations.registerDefaultDecoders();
 	}
 
-	static public void initialize(String applicationId, String restAPIKey, String serverURL) {
-		mApplicationId = applicationId;
-		mRestAPIKey = restAPIKey;
-		mAPIEndPoint = serverURL;
-		isRootMode = false;
-	}
-
 	@Deprecated
 	static public void initialize(String applicationId, String restAPIKey) {
 		mApplicationId = applicationId;
 		mRestAPIKey = restAPIKey;
-		mAPIEndPoint = DEFAULT_SERVER_URL;
 		isRootMode = false;
 		bCustomServer = false;
 	}
@@ -64,7 +56,6 @@ public class Parse {
 	static public void initializeAsRoot (String applicationId, String masterKey) {
 		mApplicationId = applicationId;
 		mMasterKey = masterKey;
-		mAPIEndPoint = DEFAULT_SERVER_URL;
 		isRootMode = true;
 	}
 
@@ -75,8 +66,6 @@ public class Parse {
 	static public String getRestAPIKey() {
 		return mRestAPIKey;
 	}
-
-	static public String getServerURL() { return mAPIEndPoint; }
 
 	public static boolean isIsRootMode() {
 		return isRootMode;
