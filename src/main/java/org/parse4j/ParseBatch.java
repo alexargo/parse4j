@@ -20,7 +20,8 @@ public class ParseBatch {
 	private static Logger LOGGER = LoggerFactory.getLogger(ParseBatch.class);
 
 	private static String getPath() {
-		return Parse.isCustomServer() ? Parse.getParseAPIUrl("classes/") : "/1/classes";
+		//FIXME: This is a hack, but not sure what it's supposed to be
+		return Parse.isCustomServer() ? "/parse/classes/" : "/1/classes";
 	}
 
 	public void deleteObject(ParseObject obj) {
