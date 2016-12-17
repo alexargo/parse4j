@@ -17,8 +17,8 @@ public class Parse {
 	private static String mMasterKey;
 	private static final DateFormat dateFormat;
 	private static boolean isRootMode;
-	private static String mAPIEndPoint;
-	private static final String DEFAULT_SERVER_URL = "https://api.parse.com/1";
+	private static String sServerPath;
+	private static boolean bCustomServer;
 
 	static {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -41,6 +41,15 @@ public class Parse {
 		mRestAPIKey = restAPIKey;
 		mAPIEndPoint = DEFAULT_SERVER_URL;
 		isRootMode = false;
+		bCustomServer = false;
+	}
+
+	static public void initialize(String applicationId, String restAPIKey, String serverPath) {
+		mApplicationId = applicationId;
+		mRestAPIKey = restAPIKey;
+		isRootMode = false;
+		sServerPath = serverPath;
+		bCustomServer = true;
 	}
 
 	/**
@@ -74,7 +83,14 @@ public class Parse {
 	}
 
 	static public String getParseAPIUrl(String context) {
-		return mAPIEndPoint + "/" + context;
+
+		if(bCustomServer){
+			return sServerPath + "/" + context;
+		}else{
+			return ParseConstants.API_ENDPOINT + "/" + ParseConstants.API_VERSION
+					+ "/" + context;
+		}
+
 	}
 
 	public static synchronized String encodeDate(Date date) {
