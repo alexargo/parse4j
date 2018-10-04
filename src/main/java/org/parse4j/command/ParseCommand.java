@@ -3,6 +3,7 @@ package org.parse4j.command;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -28,7 +29,7 @@ public abstract class ParseCommand {
 	protected boolean addJson = true;
 
 	static {
-		config = RequestConfig.custom().build();
+		config = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
 	}
 
 	abstract HttpRequestBase getRequest() throws IOException;
