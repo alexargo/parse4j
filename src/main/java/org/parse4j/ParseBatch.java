@@ -54,11 +54,24 @@ public class ParseBatch {
 	/**
 	 * from Parse.com->
 	 * The response from batch will be a list with the same number of elements as the input list.
-	 * Each item in the list with be a dictionary with either the success or error field set. 
+	 * Each item in the list with be a dictionary with either the success or error field set.
 	 * @return array of json objects corresponding to every passed object if it is successfully created
 	 * @throws ParseException
 	 */
 	public JSONArray batch() throws ParseException {
+		return batch(false);
+	}
+
+
+	/**
+	 * from Parse.com->
+	 * The response from batch will be a list with the same number of elements as the input list.
+	 * Each item in the list with be a dictionary with either the success or error field set.
+	 * @param log Boolean denoting whether you want to log the result
+	 * @return array of json objects corresponding to every passed object if it is successfully created
+	 * @throws ParseException
+	 */
+	public JSONArray batch(boolean log) throws ParseException {
 		ParseCommand command = new ParseBatchCommand();
 		command.put("requests", data);
 		ParseResponse response = command.perform();
@@ -66,7 +79,9 @@ public class ParseBatch {
 			Object json = new JSONTokener(response.getRawResponseBody()).nextValue();
 			if (json instanceof JSONArray) {
 				JSONArray jsonResponse = (JSONArray) json;
-				LOGGER.info("response is " + jsonResponse);
+				if(log) {
+					LOGGER.info("response is " + jsonResponse);
+				}
 				return jsonResponse;
 			}
 			//if the response is not array there is an error
